@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Cocktail } from '../interface/cocktails.interface';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Cocktail } from '../interfaces/cocktail.interface';
 
-@Component({
-  selector: 'app-cocktail-list',
-  templateUrl: './cocktail-list.component.html',
-  styleUrls: ['./cocktail-list.component.scss']
+@Injectable({
+  providedIn: 'root'
 })
-export class CocktailListComponent implements OnInit {
-  cocktails: Cocktail[] = [
+export class CocktailService {
+  public cocktails$: BehaviorSubject<Cocktail[]> = new BehaviorSubject([
     {
       name: 'Mojito',
       img: 'https://www.hangoverweekends.co.uk/uploads/images/mojito.jpg',
@@ -23,11 +22,15 @@ export class CocktailListComponent implements OnInit {
       img: 'https://www.hangoverweekends.co.uk/uploads/images/californication-cocktail.jpg',
       description: 'Californication as used by the Red Hot Chili Peppers means the mixing of different cultures. The cocktail reflects this with the various spirits used within the cocktail from all over the world. A mixture of run, vodka, tequila and gin finished with orange liqueur, lemon juice and orange juice to mask the various spirits used throughout. Strong and yet sweet. The cocktail is finished with either a slice of orange or a twisted peel of orange rind.'
     }
-  ]
+  ]);
 
-  constructor() { }
+  public selectedCocktail$: BehaviorSubject<Cocktail> = new BehaviorSubject(
+    this.cocktails$.value[0]
+  )
 
-  ngOnInit(): void {
+  public selectCocktail(index: number): void {
+    this.selectedCocktail$.next(this.cocktails$.value[index])
   }
 
+  constructor() { }
 }
