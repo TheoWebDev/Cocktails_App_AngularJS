@@ -1,3 +1,3 @@
 # Cocktails
 
-Formation Angular via Dyma.
+Certification Dyma - Angular.
