@@ -1,8 +1,9 @@
 import { Ingredient } from "./ingredient.interface";
 
-export interface Cocktail{
-    name: string;
-    img: string;
-    description: string;
-    ingredients?: Ingredient[];
+export interface Cocktail {
+  _id?: string;
+  name: string;
+  img: string;
+  description: string;
+  ingredients: Ingredient[];
 }
